@@ -1,0 +1,18 @@
+{
+    "Downtown": [
+        {
+            "vehicle_id": "EV1401",
+            "model": "Tesla Model X",
+            "battery": 85,
+            "type": "ElectricCar"
+        }
+    ],
+    "Airport": [
+        {
+            "vehicle_id": "EV1402",
+            "model": "Ola S1",
+            "battery": 65,
+            "type": "ElectricScooter"
+        }
+    ]
+}
