@@ -1,3 +1,4 @@
+import csv
 from electric_car import ElectricCar
 from electric_scooter import ElectricScooter
 
@@ -7,20 +8,32 @@ class EcoRideMain:
         print("Welcome to Eco-Ride Urban Mobility System")
 
         vehicles = [
-            ElectricCar("EV1201", "Tesla Model 3", 60, 5),
-            ElectricCar("EV1202", "Tesla Model Y", 90, 7),
-            ElectricScooter("EV1203", "Ather 450X", 40, 85),
-            ElectricScooter("EV1204", "Ola S1", 75, 90)
+            ElectricCar("EV1301", "Tesla Model 3", 80, 5),
+            ElectricScooter("EV1302", "Ather 450X", 70, 85)
         ]
 
-        vehicles.sort(
-            key=lambda v: v._Vehicle__battery_percentage,
-            reverse=True
-        )
+        with open("fleet.csv",mode = "w", newline = "") as file:
+            writer = csv.writer(file)
+            writer.writerow(["vehicle_id", "model","battery", "type"])
 
-        print("\nVehicles sorted by Battery Percentage(Descending):")
-        for v in vehicles:
-            v.display_details()
+            for vehicle in vehicles:
+                vehicle_type = "Car" if isinstance(vehicle,ElectricCar) else "Scooter"
+                writer.writerow([
+                    vehicle.vehicle_id,
+                    vehicle.model,
+                    vehicle._Vehicle__battery_percentage,
+                    vehicle_type
+                ])
+
+        print("\nFleet data written to fleet.csv")
+
+        print("\nReading data from CSV:")
+        with open("fleet.csv", mode="r") as file:
+            reader = csv.reader(file)
+            next(reader)
+
+            for row in reader:
+                print(row)
 
 if __name__ == "__main__":
     EcoRideMain.main()
